@@ -141,17 +141,17 @@ class Cart {
     }
     
     loadFromStorage() {
-        const cartData = JSON.parse(localStorage.getItem('pancakeCart')) || [];
-        
-        // Нужно будет загрузить блины из основного списка
-        this.items = cartData.map(itemData => {
-            const pancake = PancakeStore.getPancakeById(itemData.pancakeId);
-            if (pancake) {
-                return new CartItem(pancake, itemData.quantity);
-            }
-            return null;
-        }).filter(item => item !== null);
-    }
+    const cartData = JSON.parse(localStorage.getItem('pancakeCart')) || [];
+    
+    // Убеждаемся, что PancakeStore уже инициализирован
+    this.items = cartData.map(itemData => {
+        const pancake = PancakeStore.getPancakeById(itemData.pancakeId);
+        if (pancake) {
+            return new CartItem(pancake, itemData.quantity);
+        }
+        return null;
+    }).filter(item => item !== null);
+}
     
      updateUI() {
         // Этот метод будет вызываться из ViewModel для обновления UI
@@ -162,17 +162,45 @@ class Cart {
 }
 
 class PancakeStore {
-    static pancakes = [
-        new Pancake(1, "Блин с творогом", "Нежные блины с творожной начинкой, изюмом и ванилью", 180, "fas fa-cheese", "Классические"),
-        new Pancake(2, "Блин с мясом", "Сытные блины с начинкой из говядины, лука и специй", 220, "fas fa-drumstick-bite", "Мясные"),
-        new Pancake(3, "Блин с красной икрой", "Изысканные блины с красной икрой и сливочным маслом", 350, "fas fa-fish", "Премиум"),
-        new Pancake(4, "Блин с ягодами", "Сладкие блины со свежей клубникой, малиной и взбитыми сливками", 210, "fas fa-berries", "Сладкие"),
-        new Pancake(5, "Блин с грибами", "Ароматные блины с шампиньонами, луком и сметаной", 190, "fas fa-mushroom", "Вегетарианские"),
-        new Pancake(6, "Блин с бананом и шоколадом", "Десертные блины с бананом, шоколадным соусом и орехами", 230, "fas fa-candy", "Сладкие"),
-        new Pancake(7, "Блин с курицей", "Пикантные блины с куриным филе, сыром и зеленью", 200, "fas fa-drumstick", "Мясные"),
-        new Pancake(8, "Блин с лососем", "Блины с лососем, сливочным сыром и укропом", 280, "fas fa-fish", "Премиум")
-    ];
-    
+    // Заменяем статический массив на пустой
+    static pancakes = [];
+
+    static async loadFromJSON() {
+        try {
+            console.log('Загружаем данные из products.json...');
+            const response = await fetch('data/products.json?v=' + Date.now());
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ошибка: ${response.status}`);
+            }
+            
+            const productsData = await response.json();
+            console.log('Получено товаров из JSON:', productsData.length);
+            
+            // Преобразуем JSON в объекты Pancake
+            this.pancakes = productsData.map(item => new Pancake(
+                item.id,
+                item.name,
+                item.description,
+                item.price,
+                item.image,
+                item.category,
+                item.weight,
+                item.protein,
+                item.fat,
+                item.carbs
+            ));
+            
+            return true;
+        } catch (error) {
+            console.error('Ошибка загрузки JSON:', error);
+            // Можно оставить пустой массив или вернуть false
+            this.pancakes = [];
+            return false;
+        }
+    }
+
+    // Остальные методы класса остаются без изменений
     static getPancakeById(id) {
         return this.pancakes.find(pancake => pancake.id === id);
     }

@@ -5,14 +5,17 @@ class PancakeApp {
         this.init();
     }
     
-    init() {
-        // Инициализируем Google Sheets загрузку
-        GoogleSheets.init();
+     async init() {
+        // Сначала загружаем данные из JSON
+        await PancakeStore.loadFromJSON();
         
-        // Инициализируем компоненты UI
+        // Проверяем, что данные загрузились
+        console.log('Загружено блинов:', PancakeStore.getAllPancakes().length);
+        
+        // Потом инициализируем UI компоненты
         UIComponents.init();
         
-        // Назначаем дополнительные обработчики событий
+        // Назначаем обработчики событий
         this.setupEventListeners();
     }
     

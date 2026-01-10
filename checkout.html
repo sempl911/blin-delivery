@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа - Блиноман</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/checkout.css">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header id="checkoutHeader">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-pancakes"></i>
+                        <h1>Блиноман</h1>
+                    </a>
+                </div>
+                <div class="cart-icon" id="cartIconCheckout">
+                    <a href="index.html" style="color: inherit;">
+                        <i class="fas fa-arrow-left"></i>
+                        <span style="font-size: 1rem; margin-left: 5px;">Назад в магазин</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент страницы оформления -->
+    <main class="checkout-container">
+        <div class="container">
+            <h1 class="checkout-title">Оформление заказа</h1>
+            
+            <div class="checkout-grid">
+                <!-- Левая колонка: Товары в заказе -->
+                <div class="checkout-left">
+                    <div class="order-summary">
+                        <h2><i class="fas fa-shopping-cart"></i> Ваш заказ</h2>
+                        <div class="order-items" id="orderItems">
+                            <!-- Товары будут загружаться из корзины -->
+                        </div>
+                        <div class="order-total">
+                            <div class="total-row">
+                                <span>Сумма заказа:</span>
+                                <span id="orderSubtotal">0 ₽</span>
+                            </div>
+                            <div class="total-row">
+                                <span>Доставка:</span>
+                                <span id="deliveryCost">0 ₽</span>
+                            </div>
+                            <div class="total-row grand-total">
+                                <span>Итого к оплате:</span>
+                                <span id="orderTotal">0 ₽</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="delivery-method">
+                        <h2><i class="fas fa-truck"></i> Способ получения</h2>
+                        <div class="delivery-options">
+                            <label class="delivery-option active">
+                                <input type="radio" name="delivery" value="delivery" checked>
+                                <div class="option-content">
+                                    <div class="option-title">Доставка курьером</div>
+                                    <div class="option-desc">Доставим в течение 60 минут</div>
+                                    <div class="option-price">200 ₽</div>
+                                </div>
+                            </label>
+                            <label class="delivery-option">
+                                <input type="radio" name="delivery" value="pickup">
+                                <div class="option-content">
+                                    <div class="option-title">Самовывоз</div>
+                                    <div class="option-desc">ул. Блинная, 15 (с 10:00 до 22:00)</div>
+                                    <div class="option-price">Бесплатно</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Правая колонка: Форма оформления -->
+                <div class="checkout-right">
+                    <div class="checkout-form">
+                        <h2><i class="fas fa-user"></i> Данные для доставки</h2>
+                        
+                        <form id="checkoutForm">
+                            <div class="form-group">
+                                <label for="name">ФИО *</label>
+                                <input type="text" id="name" name="name" required placeholder="Иванов Иван Иванович">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Телефон *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="ivanov@example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="address">Адрес доставки *</label>
+                                <textarea id="address" name="address" required placeholder="ул. Примерная, д. 1, кв. 1, подъезд 2, этаж 3, код 1234" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="comment">Комментарий к заказу</label>
+                                <textarea id="comment" name="comment" placeholder="Например: позвоните за 10 минут до доставки" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="payment">Способ оплаты *</label>
+                                <select id="payment" name="payment" required>
+                                    <option value="">Выберите способ оплаты</option>
+                                    <option value="cash">Наличными при получении</option>
+                                    <option value="card">Картой при получении</option>
+                                    <option value="online">Онлайн оплата картой</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="agree" name="agree" required>
+                                <label for="agree">Я согласен с условиями обработки персональных данных и политикой конфиденциальности</label>
+                            </div>
+                            
+                            <button type="submit" class="submit-order-btn" id="submitOrderBtn">
+                                <i class="fas fa-check-circle"></i>
+                                Подтвердить заказ
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="checkout-help">
+                        <h3><i class="fas fa-question-circle"></i> Нужна помощь?</h3>
+                        <p>Звоните нам: <strong>8 (800) 123-45-67</strong></p>
+                        <p>Работаем ежедневно с 9:00 до 23:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно подтверждения заказа -->
+    <div class="modal-overlay" id="orderSuccessModal">
+        <div class="modal-content success-modal">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Заказ оформлен!</h2>
+            <p id="orderSuccessMessage">Ваш заказ №<span id="orderNumber">12345</span> успешно оформлен.</p>
+            <p>Скоро с вами свяжется наш менеджер для подтверждения заказа.</p>
+            <div class="success-actions">
+                <a href="index.html" class="btn-back">Вернуться в магазин</a>
+                <button class="btn-print" id="printOrderBtn">Распечатать заказ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение JavaScript файлов -->
+    <script src="js/models.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>

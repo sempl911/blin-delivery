@@ -44,10 +44,9 @@ const UIComponents = {
     pancakesGrid.innerHTML = pancakes.map(pancake => `
         <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
             <div class="card pancake-card h-100 shadow-sm" data-id="${pancake.id}" data-category="${pancake.category}">
-                <div class="pancake-img rounded-top position-relative" style="height: 200px; overflow: hidden;">
-                    ${pancake.getImageHtml()}
-                    // ${pancake.category ? `<span class="position-absolute top-0 end-0 bg-warning text-dark px-2 py-1 m-2 rounded small">${pancake.category}</span>` : ''}
-                </div>
+               <div class="pancake-img rounded-top position-relative" style="height: 200px; overflow: hidden;">
+    ${pancake.getImageHtml()}
+</div>
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title text-warning fw-bold">${pancake.name}</h5>
                     <p class="card-text text-muted flex-grow-1">${pancake.description}</p>

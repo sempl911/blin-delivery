@@ -46,7 +46,7 @@ const UIComponents = {
             <div class="card pancake-card h-100 shadow-sm" data-id="${pancake.id}" data-category="${pancake.category}">
                 <div class="pancake-img rounded-top position-relative" style="height: 200px; overflow: hidden;">
                     ${pancake.getImageHtml()}
-                    ${pancake.category ? `<span class="position-absolute top-0 end-0 bg-warning text-dark px-2 py-1 m-2 rounded small">${pancake.category}</span>` : ''}
+                    // ${pancake.category ? `<span class="position-absolute top-0 end-0 bg-warning text-dark px-2 py-1 m-2 rounded small">${pancake.category}</span>` : ''}
                 </div>
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title text-warning fw-bold">${pancake.name}</h5>

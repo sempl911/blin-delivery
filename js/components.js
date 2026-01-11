@@ -44,44 +44,37 @@ const UIComponents = {
     pancakesGrid.innerHTML = pancakes.map(pancake => `
         <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
             <div class="card pancake-card h-100 shadow-sm" data-id="${pancake.id}" data-category="${pancake.category}">
-                <div class="pancake-img rounded-top position-relative" style="height: 200px; overflow: hidden;">
-                    ${pancake.getImageHtml()}
+                <div class="pancake-img-container rounded-top d-flex align-items-center justify-content-center" 
+                     style="height: 180px; background-color: #f8f9fa; overflow: hidden;">
+                    <div class="pancake-image-wrapper" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                        ${pancake.getImageHtml('pancake-image')}
+                    </div>
                 </div>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title text-warning fw-bold mb-2">${pancake.name}</h5>
-                    <p class="card-text text-muted flex-grow-1 mb-3" style="font-size: 0.9rem;">${pancake.description}</p>
-                    
-                    <!-- СОСТАВ (новое поле) -->
-                    ${pancake.composition ? `
-                    <div class="composition mb-3">
-                        <div class="d-flex align-items-center mb-1">
-                            <i class="fas fa-clipboard-list text-warning me-2 small"></i>
-                            <h6 class="small fw-bold text-muted mb-0">Состав:</h6>
-                        </div>
-                        <p class="small text-muted mb-0" style="font-size: 0.85rem; line-height: 1.4;">${pancake.composition}</p>
+                
+                <div class="card-body d-flex flex-column p-3">
+                    <!-- Название и цена -->
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title text-warning fw-bold mb-0" style="font-size: 1.1rem;">${pancake.name}</h5>
+                        <div class="pancake-price fw-bold text-dark">${pancake.price} ₽</div>
                     </div>
-                    ` : ''}
                     
-                    <!-- Пищевая ценность, если есть -->
-                    ${pancake.weight ? `
-                    <div class="nutrition-info small text-muted mb-3">
-                        <div class="d-flex align-items-center mb-1">
-                            <i class="fas fa-weight text-warning me-2 small"></i>
-                            <h6 class="small fw-bold text-muted mb-0">Пищевая ценность (${pancake.weight}г):</h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            ${pancake.protein ? `<span><i class="fas fa-drumstick-bite text-muted me-1"></i>Б: ${pancake.protein}г</span>` : ''}
-                            ${pancake.fat ? `<span><i class="fas fa-oil-can text-muted me-1"></i>Ж: ${pancake.fat}г</span>` : ''}
-                            ${pancake.carbs ? `<span><i class="fas fa-bread-slice text-muted me-1"></i>У: ${pancake.carbs}г</span>` : ''}
-                        </div>
-                    </div>
-                    ` : ''}
+                    <!-- СОКРАЩЕННОЕ ОПИСАНИЕ (только первое предложение) -->
+                    <p class="card-text text-muted mb-3" style="font-size: 0.85rem; line-height: 1.4; min-height: 40px;">
+                        ${this.getFirstSentence(pancake.description)}
+                    </p>
                     
-                    <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
-                        <div class="pancake-price fw-bold fs-5">${pancake.price} ₽</div>
-                        <button class="btn btn-warning btn-add-to-cart" data-id="${pancake.id}">
+                    <!-- УБРАЛИ пищевую ценность и состав -->
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                        <button class="btn btn-warning btn-sm btn-add-to-cart" data-id="${pancake.id}">
                             <i class="fas fa-cart-plus me-1"></i>В корзину
                         </button>
+                        
+                        <!-- Индикатор, что есть больше информации -->
+                        <div class="text-muted small">
+                            <i class="fas fa-info-circle text-warning me-1"></i>
+                            <span>Есть состав и пищевая ценность</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -114,7 +107,24 @@ const UIComponents = {
             });
         });
     },
+
+    getFirstSentence: function(text) {
+    if (!text) return '';
     
+    // Находим первое предложение (до точки, восклицательного или вопросительного знака)
+    const sentenceEnd = text.match(/[.!?]/);
+    if (sentenceEnd) {
+        return text.substring(0, sentenceEnd.index + 1) + '...';
+    }
+    
+    // Если нет знаков препинания, берем первые 70 символов
+    if (text.length > 70) {
+        return text.substring(0, 70) + '...';
+    }
+    
+    return text;
+},
+
     // Обновление корзины в UI
     updateCartUI: function() {
         const cartBadge = document.getElementById('cartBadge');

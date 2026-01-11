@@ -44,24 +44,35 @@ const UIComponents = {
     pancakesGrid.innerHTML = pancakes.map(pancake => `
         <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
             <div class="card pancake-card h-100 shadow-sm" data-id="${pancake.id}" data-category="${pancake.category}">
-               <div class="pancake-img rounded-top position-relative" style="height: 200px; overflow: hidden;">
-    ${pancake.getImageHtml()}
-</div>
+                <div class="pancake-img rounded-top position-relative" style="height: 200px; overflow: hidden;">
+                    ${pancake.getImageHtml()}
+                    <!-- Убрали бейдж категории, оставляем как есть -->
+                </div>
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title text-warning fw-bold">${pancake.name}</h5>
-                    <p class="card-text text-muted flex-grow-1">${pancake.description}</p>
+                    <h5 class="card-title text-warning fw-bold mb-2">${pancake.name}</h5>
+                    <p class="card-text text-muted flex-grow-1 mb-3">${pancake.description}</p>
                     
-                    <!-- Пищевая ценность, если есть -->
-                    ${pancake.weight ? `
-                    <div class="nutrition-info small text-muted mb-2">
-                        <span class="me-3">${pancake.weight}г</span>
-                        ${pancake.protein ? `<span class="me-3">Б: ${pancake.protein}г</span>` : ''}
-                        ${pancake.fat ? `<span class="me-3">Ж: ${pancake.fat}г</span>` : ''}
-                        ${pancake.carbs ? `<span>У: ${pancake.carbs}г</span>` : ''}
+                    <!-- СОСТАВ (если есть) -->
+                    ${pancake.composition ? `
+                    <div class="composition mb-3">
+                        <h6 class="small fw-bold text-muted mb-1">Состав:</h6>
+                        <p class="small text-muted mb-0">${pancake.composition}</p>
                     </div>
                     ` : ''}
                     
-                    <div class="d-flex justify-content-between align-items-center mt-3">
+                    <!-- Пищевая ценность -->
+                    ${pancake.weight ? `
+                    <div class="nutrition-info small text-muted mb-3">
+                        <div class="fw-bold mb-1">Пищевая ценность в ${pancake.weight}г:</div>
+                        <div class="d-flex justify-content-between">
+                            ${pancake.protein ? `<span>Белки: ${pancake.protein}г</span>` : ''}
+                            ${pancake.fat ? `<span>Жиры: ${pancake.fat}г</span>` : ''}
+                            ${pancake.carbs ? `<span>Углеводы: ${pancake.carbs}г</span>` : ''}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
                         <div class="pancake-price fw-bold fs-5">${pancake.price} ₽</div>
                         <button class="btn btn-warning btn-add-to-cart" data-id="${pancake.id}">
                             <i class="fas fa-cart-plus me-1"></i>В корзину

@@ -46,28 +46,33 @@ const UIComponents = {
             <div class="card pancake-card h-100 shadow-sm" data-id="${pancake.id}" data-category="${pancake.category}">
                 <div class="pancake-img rounded-top position-relative" style="height: 200px; overflow: hidden;">
                     ${pancake.getImageHtml()}
-                    <!-- Убрали бейдж категории, оставляем как есть -->
                 </div>
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title text-warning fw-bold mb-2">${pancake.name}</h5>
-                    <p class="card-text text-muted flex-grow-1 mb-3">${pancake.description}</p>
+                    <p class="card-text text-muted flex-grow-1 mb-3" style="font-size: 0.9rem;">${pancake.description}</p>
                     
-                    <!-- СОСТАВ (если есть) -->
+                    <!-- СОСТАВ (новое поле) -->
                     ${pancake.composition ? `
                     <div class="composition mb-3">
-                        <h6 class="small fw-bold text-muted mb-1">Состав:</h6>
-                        <p class="small text-muted mb-0">${pancake.composition}</p>
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="fas fa-clipboard-list text-warning me-2 small"></i>
+                            <h6 class="small fw-bold text-muted mb-0">Состав:</h6>
+                        </div>
+                        <p class="small text-muted mb-0" style="font-size: 0.85rem; line-height: 1.4;">${pancake.composition}</p>
                     </div>
                     ` : ''}
                     
-                    <!-- Пищевая ценность -->
+                    <!-- Пищевая ценность, если есть -->
                     ${pancake.weight ? `
                     <div class="nutrition-info small text-muted mb-3">
-                        <div class="fw-bold mb-1">Пищевая ценность в ${pancake.weight}г:</div>
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="fas fa-weight text-warning me-2 small"></i>
+                            <h6 class="small fw-bold text-muted mb-0">Пищевая ценность (${pancake.weight}г):</h6>
+                        </div>
                         <div class="d-flex justify-content-between">
-                            ${pancake.protein ? `<span>Белки: ${pancake.protein}г</span>` : ''}
-                            ${pancake.fat ? `<span>Жиры: ${pancake.fat}г</span>` : ''}
-                            ${pancake.carbs ? `<span>Углеводы: ${pancake.carbs}г</span>` : ''}
+                            ${pancake.protein ? `<span><i class="fas fa-drumstick-bite text-muted me-1"></i>Б: ${pancake.protein}г</span>` : ''}
+                            ${pancake.fat ? `<span><i class="fas fa-oil-can text-muted me-1"></i>Ж: ${pancake.fat}г</span>` : ''}
+                            ${pancake.carbs ? `<span><i class="fas fa-bread-slice text-muted me-1"></i>У: ${pancake.carbs}г</span>` : ''}
                         </div>
                     </div>
                     ` : ''}

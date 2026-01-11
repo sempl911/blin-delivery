@@ -1,13 +1,14 @@
 // Модели данных для приложения
 
 class Pancake {
-    constructor(id, name, description, price, image, category, weight = null, protein = null, fat = null, carbs = null) {
+    constructor(id, name, description, price, image, category, weight = null, protein = null, fat = null, carbs = null,composition = '') {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.image = image;
         this.category = category;
+        this.composition = composition;
         this.weight = weight;
         this.protein = protein;
         this.fat = fat;
@@ -166,39 +167,39 @@ class PancakeStore {
     static pancakes = [];
 
     static async loadFromJSON() {
-        try {
-            console.log('Загружаем данные из products.json...');
-            const response = await fetch('data/products.json?v=' + Date.now());
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ошибка: ${response.status}`);
-            }
-            
-            const productsData = await response.json();
-            console.log('Получено товаров из JSON:', productsData.length);
-            
-            // Преобразуем JSON в объекты Pancake
-            this.pancakes = productsData.map(item => new Pancake(
-                item.id,
-                item.name,
-                item.description,
-                item.price,
-                item.image,
-                item.category,
-                item.weight,
-                item.protein,
-                item.fat,
-                item.carbs
-            ));
-            
-            return true;
-        } catch (error) {
-            console.error('Ошибка загрузки JSON:', error);
-            // Можно оставить пустой массив или вернуть false
-            this.pancakes = [];
-            return false;
+    try {
+        console.log('Загружаем данные из products.json...');
+        const response = await fetch('data/products.json?v=' + Date.now());
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ошибка: ${response.status}`);
         }
+        
+        const productsData = await response.json();
+        console.log('Получено товаров из JSON:', productsData.length);
+        
+        // Преобразуем JSON в объекты Pancake
+        this.pancakes = productsData.map(item => new Pancake(
+            item.id,
+            item.name,
+            item.description,
+            item.price,
+            item.image,
+            item.category,
+            item.weight,
+            item.protein,
+            item.fat,
+            item.carbs,
+            item.composition || '' // ← Добавляем состав (если есть в JSON)
+        ));
+        
+        return true;
+    } catch (error) {
+        console.error('Ошибка загрузки JSON:', error);
+        this.pancakes = [];
+        return false;
     }
+}
 
     // Остальные методы класса остаются без изменений
     static getPancakeById(id) {

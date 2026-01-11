@@ -44,24 +44,40 @@ const UIComponents = {
     pancakesGrid.innerHTML = pancakes.map(pancake => `
         <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
             <div class="card pancake-card h-100 shadow-sm" data-id="${pancake.id}" data-category="${pancake.category}">
-               <div class="pancake-img rounded-top position-relative" style="height: 200px; overflow: hidden;">
-    ${pancake.getImageHtml()}
-</div>
+                <div class="pancake-img rounded-top position-relative" style="height: 200px; overflow: hidden;">
+                    ${pancake.getImageHtml()}
+                </div>
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title text-warning fw-bold">${pancake.name}</h5>
-                    <p class="card-text text-muted flex-grow-1">${pancake.description}</p>
+                    <h5 class="card-title text-warning fw-bold mb-2">${pancake.name}</h5>
+                    <p class="card-text text-muted flex-grow-1 mb-3" style="font-size: 0.9rem;">${pancake.description}</p>
                     
-                    <!-- Пищевая ценность, если есть -->
-                    ${pancake.weight ? `
-                    <div class="nutrition-info small text-muted mb-2">
-                        <span class="me-3">${pancake.weight}г</span>
-                        ${pancake.protein ? `<span class="me-3">Б: ${pancake.protein}г</span>` : ''}
-                        ${pancake.fat ? `<span class="me-3">Ж: ${pancake.fat}г</span>` : ''}
-                        ${pancake.carbs ? `<span>У: ${pancake.carbs}г</span>` : ''}
+                    <!-- СОСТАВ (новое поле) -->
+                    ${pancake.composition ? `
+                    <div class="composition mb-3">
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="fas fa-clipboard-list text-warning me-2 small"></i>
+                            <h6 class="small fw-bold text-muted mb-0">Состав:</h6>
+                        </div>
+                        <p class="small text-muted mb-0" style="font-size: 0.85rem; line-height: 1.4;">${pancake.composition}</p>
                     </div>
                     ` : ''}
                     
-                    <div class="d-flex justify-content-between align-items-center mt-3">
+                    <!-- Пищевая ценность, если есть -->
+                    ${pancake.weight ? `
+                    <div class="nutrition-info small text-muted mb-3">
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="fas fa-weight text-warning me-2 small"></i>
+                            <h6 class="small fw-bold text-muted mb-0">Пищевая ценность (${pancake.weight}г):</h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            ${pancake.protein ? `<span><i class="fas fa-drumstick-bite text-muted me-1"></i>Б: ${pancake.protein}г</span>` : ''}
+                            ${pancake.fat ? `<span><i class="fas fa-oil-can text-muted me-1"></i>Ж: ${pancake.fat}г</span>` : ''}
+                            ${pancake.carbs ? `<span><i class="fas fa-bread-slice text-muted me-1"></i>У: ${pancake.carbs}г</span>` : ''}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
                         <div class="pancake-price fw-bold fs-5">${pancake.price} ₽</div>
                         <button class="btn btn-warning btn-add-to-cart" data-id="${pancake.id}">
                             <i class="fas fa-cart-plus me-1"></i>В корзину
@@ -203,18 +219,19 @@ const UIComponents = {
     const modalCategory = document.getElementById('productModalCategory');
     const modalImage = document.getElementById('productModalImage');
     const modalNutrition = document.getElementById('productModalNutrition');
+    const modalCompositionContainer = document.getElementById('productModalCompositionContainer');
+    const modalComposition = document.getElementById('productModalComposition');
     const addToCartModal = document.getElementById('addToCartModal');
     
+    // Основная информация
     if (modalTitle) modalTitle.textContent = pancake.name;
     if (modalPrice) modalPrice.textContent = `${pancake.price} ₽`;
     if (modalDescription) modalDescription.textContent = pancake.description;
     if (modalCategory) modalCategory.textContent = pancake.category;
     
-    // Отображаем фото или иконку
+    // Фото
     if (modalImage) {
         modalImage.innerHTML = pancake.getImageHtml();
-        
-        // Добавляем стили для изображения в модальном окне
         if (pancake.isPhoto) {
             modalImage.querySelector('img').style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
         } else {
@@ -226,7 +243,17 @@ const UIComponents = {
         }
     }
     
-    // Отображаем пищевую ценность, если есть
+    // СОСТАВ (новый блок)
+    if (modalCompositionContainer && modalComposition) {
+        if (pancake.composition && pancake.composition.trim() !== '') {
+            modalComposition.textContent = pancake.composition;
+            modalCompositionContainer.style.display = 'block';
+        } else {
+            modalCompositionContainer.style.display = 'none';
+        }
+    }
+    
+    // Пищевая ценность
     if (modalNutrition) {
         if (pancake.weight || pancake.protein || pancake.fat || pancake.carbs) {
             modalNutrition.style.display = 'block';
@@ -248,12 +275,12 @@ const UIComponents = {
         }
     }
     
-    // Устанавливаем ID блина на кнопку
+    // Кнопка добавления в корзину
     if (addToCartModal) {
         addToCartModal.dataset.id = pancake.id;
     }
     
-    // Сбрасываем количество
+    // Сброс количества
     const quantityElement = document.getElementById('productQty');
     if (quantityElement) quantityElement.value = 1;
     

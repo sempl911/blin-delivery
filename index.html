@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <!-- Кастомные стили -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -19,7 +20,7 @@
         <div class="container">
             <!-- Логотип -->
             <a class="navbar-brand fw-bold text-warning" href="#">
-                <i class="fas fa-pancakes me-2"></i>Блиноман
+                <i class="fas fa-pancakes me-2"></i>Naleśnikowa sprawa
             </a>
             
             <!-- Кнопка мобильного меню -->
@@ -114,7 +115,7 @@
                 <!-- Изображение в герое -->
                 <div class="col-lg-6">
                     <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                        <img src="data/site_photos/main_blin.jpg" 
                              class="img-fluid rounded-3 shadow-lg" alt="Вкусные блины">
                         <div class="position-absolute bottom-0 start-0 bg-warning text-white p-3 rounded-end">
                             <h4 class="mb-0">От 150₽</h4>
@@ -145,7 +146,7 @@
                         <button class="btn btn-outline-warning" data-category="Мясные">Мясные</button>
                         <button class="btn btn-outline-warning" data-category="Сладкие">Сладкие</button>
                         <button class="btn btn-outline-warning" data-category="Вегетарианские">Вегетарианские</button>
-                        <button class="btn btn-outline-warning" data-category="Премиум">Премиум</button>
+                        <button class="btn btn-outline-warning" data-category="Соленные">Соленные</button>
                     </div>
                 </div>
             </div>
@@ -170,7 +171,7 @@
         <div class="container py-5">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0">
-                    <img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                    <img src="data/site_photos/sweat_blin.jpg" 
                          class="img-fluid rounded-3 shadow" alt="Приготовление блинов">
                 </div>
                 <div class="col-lg-6">
@@ -208,7 +209,7 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <div class="bg-warning text-white rounded-circle p-3">
-                                        <i class="fas fa-chef-hat fs-4"></i>
+                                        <i class="fas fa-utensils fs-4"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -305,7 +306,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="product-image-container rounded-3 overflow-hidden" id="productModalImage" style="height: 300px;">
-                            <!-- Фото или иконка будет вставлена здесь -->
+                            <!-- Фото будет вставлено здесь -->
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -314,33 +315,43 @@
                             <span class="badge bg-warning text-dark" id="productModalCategory">Категория</span>
                         </div>
                         
-                        <p class="text-muted mb-4" id="productModalDescription">Описание блина</p>
+                        <p class="text-muted mb-3" id="productModalDescription">Описание блина</p>
+                        
+                        <!-- НОВОЕ: Блок для состава -->
+                        <div class="composition-modal mb-3" id="productModalCompositionContainer" style="display: none;">
+                            <h6 class="fw-bold text-dark mb-2">
+                                <i class="fas fa-clipboard-list text-warning me-2"></i>Состав:
+                            </h6>
+                            <p class="text-muted small mb-0" id="productModalComposition">Состав будет здесь</p>
+                        </div>
                         
                         <!-- Пищевая ценность -->
                         <div class="nutrition-details mb-4" id="productModalNutrition" style="display: none;">
-                            <h6 class="fw-bold mb-2">Пищевая ценность:</h6>
+                            <h6 class="fw-bold text-dark mb-2">
+                                <i class="fas fa-weight text-warning me-2"></i>Пищевая ценность:
+                            </h6>
                             <div class="row small text-muted">
                                 <div class="col-3">
                                     <div class="fw-bold" id="productModalWeight">0г</div>
-                                    <div>Вес</div>
+                                    <div class="small">Вес</div>
                                 </div>
                                 <div class="col-3">
                                     <div class="fw-bold" id="productModalProtein">0г</div>
-                                    <div>Белки</div>
+                                    <div class="small">Белки</div>
                                 </div>
                                 <div class="col-3">
                                     <div class="fw-bold" id="productModalFat">0г</div>
-                                    <div>Жиры</div>
+                                    <div class="small">Жиры</div>
                                 </div>
                                 <div class="col-3">
                                     <div class="fw-bold" id="productModalCarbs">0г</div>
-                                    <div>Углеводы</div>
+                                    <div class="small">Углеводы</div>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="mb-4">
-                            <label class="form-label">Количество:</label>
+                            <label class="form-label fw-bold">Количество:</label>
                             <div class="input-group" style="width: 150px;">
                                 <button class="btn btn-outline-warning" type="button" id="decreaseQty">-</button>
                                 <input type="number" class="form-control text-center" value="1" min="1" max="20" id="productQty">
@@ -361,71 +372,106 @@
 </div>
 
     <!-- Футер -->
-    <footer class="bg-dark text-white py-5" id="contacts">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h4 class="fw-bold text-warning mb-4">
-                        <i class="fas fa-pancakes me-2"></i>Блиноман
-                    </h4>
-                    <p class="mb-4">Доставка вкуснейших блинов с разнообразными начинками прямо к вам домой.</p>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="text-white fs-4"><i class="fab fa-vk"></i></a>
-                        <a href="#" class="text-white fs-4"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="text-white fs-4"><i class="fab fa-instagram"></i></a>
+   <footer class="bg-dark text-white py-5" id="contacts">
+    <div class="container">
+        <div class="row">
+            <!-- Левая колонка: Лого и информация -->
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <h4 class="fw-bold text-warning mb-4">
+                    <i class="fas fa-pancakes me-2"></i>Блиноман
+                </h4>
+                <p class="mb-4">Доставка вкуснейших блинов с разнообразными начинками прямо к вам домой. Готовим с любовью, доставляем с заботой!</p>
+                
+                <!-- Кнопка "Поделиться" (новая) -->
+                <div class="share-section mb-4">
+                    <h6 class="fw-bold mb-3 text-white">Поделиться сайтом:</h6>
+                    <div class="d-flex flex-wrap gap-2" id="shareButtons">
+                        <button class="btn btn-sm btn-outline-warning share-btn" data-platform="telegram">
+                            <i class="fab fa-telegram me-1"></i> Telegram
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning share-btn" data-platform="whatsapp">
+                            <i class="fab fa-whatsapp me-1"></i> WhatsApp
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning share-btn" data-platform="copy">
+                            <i class="fas fa-link me-1"></i> Скопировать ссылку
+                        </button>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Центральная колонка: Контакты -->
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <h5 class="fw-bold mb-4 text-warning">Контакты</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-3">
+                        <i class="fas fa-phone text-warning me-2"></i>
+                        <a href="tel:+78001234567" class="text-white text-decoration-none">8 (800) 123-45-67</a>
+                    </li>
+                    <li class="mb-3">
+                        <i class="fas fa-envelope text-warning me-2"></i>
+                        <a href="mailto:info@blinoman.ru" class="text-white text-decoration-none">info@blinoman.ru</a>
+                    </li>
+                    <li class="mb-3">
+                        <i class="fas fa-map-marker-alt text-warning me-2"></i>
+                        г. Москва, ул. Блинная, 15
+                    </li>
+                    <li>
+                        <i class="fas fa-clock text-warning me-2"></i>
+                        Ежедневно с 9:00 до 23:00
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Правая колонка: Соцсети -->
+            <div class="col-lg-4">
+                <h5 class="fw-bold mb-4 text-warning">Мы в социальных сетях</h5>
+                <p class="mb-4">Следите за нашими новостями, акциями и специальными предложениями:</p>
                 
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5 class="fw-bold mb-4">Контакты</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-3">
-                            <i class="fas fa-phone text-warning me-2"></i>
-                            <a href="tel:+78001234567" class="text-white text-decoration-none">8 (800) 123-45-67</a>
-                        </li>
-                        <li class="mb-3">
-                            <i class="fas fa-envelope text-warning me-2"></i>
-                            <a href="mailto:info@blinoman.ru" class="text-white text-decoration-none">info@blinoman.ru</a>
-                        </li>
-                        <li class="mb-3">
-                            <i class="fas fa-map-marker-alt text-warning me-2"></i>
-                            г. Москва, ул. Блинная, 15
-                        </li>
-                        <li>
-                            <i class="fas fa-clock text-warning me-2"></i>
-                            Ежедневно с 9:00 до 23:00
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-4">
-                    <h5 class="fw-bold mb-4">Управление через Google Таблицы</h5>
-                    <div class="bg-dark border border-warning rounded p-3">
-                        <p class="small mb-3">Обновляйте цены и ассортимент через Google Таблицы</p>
-                        <button class="btn btn-sm btn-outline-warning w-100 mb-2" id="importFromSheets">
-                            <i class="fab fa-google me-1"></i> Импорт из Google Sheets
-                        </button>
-                        <div class="input-group input-group-sm" id="sheetsUrlInput" style="display: none;">
-                            <input type="text" class="form-control" placeholder="URL Google Таблицы" id="sheetsUrl">
-                            <button class="btn btn-warning" id="loadFromUrl">Загрузить</button>
+                <div class="social-icons mb-4">
+                    <div class="row g-3">
+                        
+                        <div class="col-6 col-md-4">
+                            <a href="#" class="social-link d-flex flex-column align-items-center text-white text-decoration-none">
+                                <div class="social-icon-circle bg-info rounded-circle d-flex align-items-center justify-content-center mb-2" style="width: 60px; height: 60px;">
+                                    <i class="fab fa-telegram fs-4"></i>
+                                </div>
+                                <span class="small">Telegram</span>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <a href="#" class="social-link d-flex flex-column align-items-center text-white text-decoration-none">
+                                <div class="social-icon-circle bg-instagram rounded-circle d-flex align-items-center justify-content-center mb-2" style="width: 60px; height: 60px;">
+                                    <i class="fab fa-instagram fs-4"></i>
+                                </div>
+                                <span class="small">Instagram</span>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <a href="#" class="social-link d-flex flex-column align-items-center text-white text-decoration-none">
+                                <div class="social-icon-circle bg-success rounded-circle d-flex align-items-center justify-content-center mb-2" style="width: 60px; height: 60px;">
+                                    <i class="fab fa-whatsapp fs-4"></i>
+                                </div>
+                                <span class="small">WhatsApp</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <hr class="my-5 border-warning">
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0">&copy; 2023 Блиноман. Все права защищены.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="#" class="text-white text-decoration-none me-3">Политика конфиденциальности</a>
-                    <a href="#" class="text-white text-decoration-none">Условия использования</a>
-                </div>
+        </div>
+        
+        <hr class="my-5 border-warning">
+        
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <p class="mb-0">&copy; 2023 Блиноман. Все права защищены.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="#" class="text-white text-decoration-none me-3">Политика конфиденциальности</a>
+                <a href="#" class="text-white text-decoration-none">Условия использования</a>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

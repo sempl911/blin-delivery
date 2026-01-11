@@ -390,3 +390,157 @@ img:before {
     font-weight: 900;
     content: "\f1b0"; /* Иконка блина */
 }
+/* Стили для состава */
+.composition {
+    background-color: rgba(255, 193, 7, 0.05);
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 3px solid #ffc107;
+    margin-bottom: 15px;
+}
+
+.composition h6 {
+    color: #ff9800 !important;
+    font-size: 0.85rem;
+}
+
+.composition p {
+    line-height: 1.5;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* Стили для пищевой ценности */
+.nutrition-info {
+    background-color: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.nutrition-info h6 {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.nutrition-info .d-flex {
+    gap: 15px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.nutrition-info span {
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Адаптивность для карточек */
+@media (max-width: 768px) {
+    .nutrition-info .d-flex {
+        gap: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .composition, .nutrition-info {
+        padding: 10px;
+    }
+}
+/* Стили для состава в модальном окне */
+.composition-modal {
+    background-color: #f8f9fa;
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.composition-modal h6 {
+    color: #333;
+    font-size: 1rem;
+}
+
+.composition-modal p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* Адаптивность модального окна */
+@media (max-width: 768px) {
+    .composition-modal {
+        padding: 12px;
+    }
+    
+    .composition-modal p {
+        font-size: 0.9rem;
+    }
+}
+/* Стили для футера */
+.social-icon-circle {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.social-icon-circle:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.social-link:hover {
+    color: #ffc107 !important;
+}
+
+/* Цвета для соцсетей */
+.bg-instagram {
+    background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+}
+
+.bg-youtube {
+    background-color: #FF0000;
+}
+
+.bg-primary {
+    background-color: #4C75A3 !important; /* VK цвет */
+}
+
+.bg-info {
+    background-color: #0088cc !important; /* Telegram цвет */
+}
+
+.bg-success {
+    background-color: #25D366 !important; /* WhatsApp цвет */
+}
+
+/* Кнопки "Поделиться" */
+.share-btn {
+    transition: all 0.3s ease;
+    border-width: 2px;
+}
+
+.share-btn:hover {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+    transform: translateY(-2px);
+}
+
+/* Адаптивность футера */
+@media (max-width: 768px) {
+    .social-icon-circle {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    .social-icon-circle i {
+        font-size: 1.2rem !important;
+    }
+    
+    .share-btn {
+        font-size: 0.85rem;
+        padding: 5px 10px;
+    }
+}

@@ -70,6 +70,11 @@ const UIComponents = {
                             <i class="fas fa-cart-plus me-1"></i>В корзину
                         </button>
                         
+                        <!-- Индикатор, что есть больше информации -->
+                        <div class="text-muted small">
+                            <i class="fas fa-info-circle text-warning me-1"></i>
+                            <span>Подробнее</span>
+                        </div>
                     </div>
                 </div>
             </div>

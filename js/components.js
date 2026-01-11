@@ -45,7 +45,7 @@ const UIComponents = {
         <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
             <div class="card pancake-card h-100 shadow-sm" data-id="${pancake.id}" data-category="${pancake.category}">
                 <div class="pancake-img-container rounded-top d-flex align-items-center justify-content-center" 
-                     style="height: 190px; background-color: #f8f9fa; overflow: hidden;">
+                     style="height: 220px; background-color: #f8f9fa; overflow: hidden;">
                     <div class="pancake-image-wrapper" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
                         ${pancake.getImageHtml('pancake-image')}
                     </div>

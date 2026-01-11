@@ -73,7 +73,7 @@ const UIComponents = {
                         <!-- Индикатор, что есть больше информации -->
                         <div class="text-muted small">
                             <i class="fas fa-info-circle text-warning me-1"></i>
-                            <span>Есть состав и пищевая ценность</span>
+                            <span>Подробнее</span>
                         </div>
                     </div>
                 </div>

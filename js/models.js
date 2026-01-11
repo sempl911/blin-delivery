@@ -1,7 +1,7 @@
 // Модели данных для приложения
 
 class Pancake {
-    constructor(id, name, description, price, image, category, weight = null, protein = null, fat = null, carbs = null) {
+    constructor(id, name, description, price, image, category, weight = null, protein = null, fat = null, carbs = null,composition = '') {
         this.id = id;
         this.name = name;
         this.description = description;

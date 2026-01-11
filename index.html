@@ -305,7 +305,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="product-image-container rounded-3 overflow-hidden" id="productModalImage" style="height: 300px;">
-                            <!-- Фото или иконка будет вставлена здесь -->
+                            <!-- Фото будет вставлено здесь -->
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -314,33 +314,43 @@
                             <span class="badge bg-warning text-dark" id="productModalCategory">Категория</span>
                         </div>
                         
-                        <p class="text-muted mb-4" id="productModalDescription">Описание блина</p>
+                        <p class="text-muted mb-3" id="productModalDescription">Описание блина</p>
+                        
+                        <!-- НОВОЕ: Блок для состава -->
+                        <div class="composition-modal mb-3" id="productModalCompositionContainer" style="display: none;">
+                            <h6 class="fw-bold text-dark mb-2">
+                                <i class="fas fa-clipboard-list text-warning me-2"></i>Состав:
+                            </h6>
+                            <p class="text-muted small mb-0" id="productModalComposition">Состав будет здесь</p>
+                        </div>
                         
                         <!-- Пищевая ценность -->
                         <div class="nutrition-details mb-4" id="productModalNutrition" style="display: none;">
-                            <h6 class="fw-bold mb-2">Пищевая ценность:</h6>
+                            <h6 class="fw-bold text-dark mb-2">
+                                <i class="fas fa-weight text-warning me-2"></i>Пищевая ценность:
+                            </h6>
                             <div class="row small text-muted">
                                 <div class="col-3">
                                     <div class="fw-bold" id="productModalWeight">0г</div>
-                                    <div>Вес</div>
+                                    <div class="small">Вес</div>
                                 </div>
                                 <div class="col-3">
                                     <div class="fw-bold" id="productModalProtein">0г</div>
-                                    <div>Белки</div>
+                                    <div class="small">Белки</div>
                                 </div>
                                 <div class="col-3">
                                     <div class="fw-bold" id="productModalFat">0г</div>
-                                    <div>Жиры</div>
+                                    <div class="small">Жиры</div>
                                 </div>
                                 <div class="col-3">
                                     <div class="fw-bold" id="productModalCarbs">0г</div>
-                                    <div>Углеводы</div>
+                                    <div class="small">Углеводы</div>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="mb-4">
-                            <label class="form-label">Количество:</label>
+                            <label class="form-label fw-bold">Количество:</label>
                             <div class="input-group" style="width: 150px;">
                                 <button class="btn btn-outline-warning" type="button" id="decreaseQty">-</button>
                                 <input type="number" class="form-control text-center" value="1" min="1" max="20" id="productQty">

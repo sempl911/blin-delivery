@@ -449,3 +449,34 @@ img:before {
         padding: 10px;
     }
 }
+/* Стили для состава в модальном окне */
+.composition-modal {
+    background-color: #f8f9fa;
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.composition-modal h6 {
+    color: #333;
+    font-size: 1rem;
+}
+
+.composition-modal p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* Адаптивность модального окна */
+@media (max-width: 768px) {
+    .composition-modal {
+        padding: 12px;
+    }
+    
+    .composition-modal p {
+        font-size: 0.9rem;
+    }
+}

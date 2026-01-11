@@ -219,18 +219,19 @@ const UIComponents = {
     const modalCategory = document.getElementById('productModalCategory');
     const modalImage = document.getElementById('productModalImage');
     const modalNutrition = document.getElementById('productModalNutrition');
+    const modalCompositionContainer = document.getElementById('productModalCompositionContainer');
+    const modalComposition = document.getElementById('productModalComposition');
     const addToCartModal = document.getElementById('addToCartModal');
     
+    // Основная информация
     if (modalTitle) modalTitle.textContent = pancake.name;
     if (modalPrice) modalPrice.textContent = `${pancake.price} ₽`;
     if (modalDescription) modalDescription.textContent = pancake.description;
     if (modalCategory) modalCategory.textContent = pancake.category;
     
-    // Отображаем фото или иконку
+    // Фото
     if (modalImage) {
         modalImage.innerHTML = pancake.getImageHtml();
-        
-        // Добавляем стили для изображения в модальном окне
         if (pancake.isPhoto) {
             modalImage.querySelector('img').style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
         } else {
@@ -242,7 +243,17 @@ const UIComponents = {
         }
     }
     
-    // Отображаем пищевую ценность, если есть
+    // СОСТАВ (новый блок)
+    if (modalCompositionContainer && modalComposition) {
+        if (pancake.composition && pancake.composition.trim() !== '') {
+            modalComposition.textContent = pancake.composition;
+            modalCompositionContainer.style.display = 'block';
+        } else {
+            modalCompositionContainer.style.display = 'none';
+        }
+    }
+    
+    // Пищевая ценность
     if (modalNutrition) {
         if (pancake.weight || pancake.protein || pancake.fat || pancake.carbs) {
             modalNutrition.style.display = 'block';
@@ -264,12 +275,12 @@ const UIComponents = {
         }
     }
     
-    // Устанавливаем ID блина на кнопку
+    // Кнопка добавления в корзину
     if (addToCartModal) {
         addToCartModal.dataset.id = pancake.id;
     }
     
-    // Сбрасываем количество
+    // Сброс количества
     const quantityElement = document.getElementById('productQty');
     if (quantityElement) quantityElement.value = 1;
     
